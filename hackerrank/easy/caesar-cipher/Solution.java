@@ -16,10 +16,27 @@ class Result {
      */
 
     public static String caesarCipher(String s, int k) {
-    // Write your code here
+        // Normalize the rotation to be within the range of 0-25
+        k = k % 26;
 
+        // StringBuilder to build the encrypted string
+        StringBuilder encrypted = new StringBuilder();
+
+        // Iterate through each character in the string
+        for (char c : s.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                char shifted = (char) ((c - base + k) % 26 + base);
+                encrypted.append(shifted);
+            } else {
+                // If not a letter, append the character as is
+                encrypted.append(c);
+            }
+        }
+
+        // Return the encrypted string
+        return encrypted.toString();
     }
-
 }
 
 public class Solution {
