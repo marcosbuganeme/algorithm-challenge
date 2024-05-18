@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
 class Result {
@@ -19,7 +20,17 @@ class Result {
 
     public static int birthdayCakeCandles(List<Integer> candles) {
 
+        int greatestNumber = candles
+                                .stream()
+                                .max(Integer::compare)
+                                .orElseThrow(NoSuchElementException::new);
 
+        Long countCandles = candles
+                                .stream()
+                                .filter(candle -> candle == greatestNumber)
+                                .count();
+
+        return countCandles.intValue();
     }
 
 }
